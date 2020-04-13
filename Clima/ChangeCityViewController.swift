@@ -36,8 +36,7 @@ class ChangeCityViewController: UIViewController {
     
     private func subscribeToGetWeather() {
         getWeatherButton.rx.tap
-            .filter({ [weak self] _ in
-                guard let self = self else { return false }
+            .filter({ _ in
                 return !self.changeCityTextField.text!.isEmpty
             })
             .do(onNext: { [weak self] _ in

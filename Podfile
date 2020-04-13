@@ -6,8 +6,6 @@ target 'Clima' do
 
   # Pods for Clima
 
-  pod 'SwiftyJSON'
-  pod 'Alamofire'
   pod 'SVProgressHUD'
   pod 'RxSwift'
   pod 'RxCocoa'
