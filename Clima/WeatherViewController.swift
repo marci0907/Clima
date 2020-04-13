@@ -1,7 +1,5 @@
 import UIKit
 import CoreLocation
-import Alamofire
-import SwiftyJSON
 import RxSwift
 import RxCocoa
 
@@ -84,8 +82,11 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     //MARK: - Networking
         
     func getWeatherData(url: String) {
+        guard let url = URL(string: url) else {
+            self.weatherData.onNext(WeatherData.noDataWeather())
+            return
+        }
         
-        let url = URL(string: url)!
         let request = createRequest(fromUrl: url)
         
         URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
@@ -94,11 +95,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                 let response = response as? HTTPURLResponse, (200...300).contains(response.statusCode),
                 let data = data else {
                     print("Either an error occurred, the HTML response was wrong or the data was nil.")
-                    let errorData = WeatherData(
-                        main: Temperature(temp: 0.0),
-                        name: "Location not available",
-                        weather: [Weather(id: -1)])
-                    self.weatherData.onNext(errorData)
+                    self.weatherData.onNext(WeatherData.noDataWeather())
                     return
             }
             

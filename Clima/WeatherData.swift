@@ -55,3 +55,12 @@ struct Temperature: Codable {
 struct Weather: Codable {
     let id: Int
 }
+
+extension WeatherData {
+    static func noDataWeather() -> WeatherData {
+        return WeatherData(
+            main: Temperature(temp: 0.0),
+            name: "Location not available",
+            weather: [Weather(id: -1)])
+    }
+}
