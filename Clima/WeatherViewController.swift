@@ -11,7 +11,6 @@ class WeatherViewController: UIViewController {
         static let changeCityVCId = "ChangeCityViewController"
     }
     
-    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
     let locationManager = CLLocationManager()
     let weatherData = PublishSubject<WeatherData>()
     let disposeBag = DisposeBag()
@@ -73,7 +72,7 @@ class WeatherViewController: UIViewController {
             .subscribe(onNext: { [weak self] newCityName in
                 guard let self = self else { return }
                 let cityNameWithouthSpaces = newCityName.replacingOccurrences(of: " ", with: "+")
-                let finalURL = self.WEATHER_URL + "?q=\(cityNameWithouthSpaces)&appid=\(APP_ID)"
+                let finalURL = EndPoint.baseURL() + EndPoint.queryWithName(name: cityNameWithouthSpaces)
                 self.getWeatherData(url: finalURL)
             }).disposed(by: self.disposeBag)
     }
@@ -131,13 +130,11 @@ extension WeatherViewController: CLLocationManagerDelegate {
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
-            
-            print("longitude = \(location.coordinate.longitude), latitude = \(location.coordinate.latitude)")
-            
+                        
             let latitude = String(location.coordinate.latitude)
             let longitude = String(location.coordinate.longitude)
-            //TODO: fix the api url
-            let finalURL = WEATHER_URL + "?lat=\(latitude)&lon=\(longitude)&appid=\(APP_ID)"
+
+            let finalURL = EndPoint.baseURL() + EndPoint.queryWithLonLat(latitude: latitude, longitude: longitude)
             getWeatherData(url: finalURL)
         }
     }

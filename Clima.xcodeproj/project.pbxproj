@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		352C6B7724449BFE0021D145 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352C6B7624449BFE0021D145 /* Networking.swift */; };
 		3537B6A9244464AC00ED9A85 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3537B6A8244464AC00ED9A85 /* Keys.swift */; };
 		356EB28B2440E39200A28FFB /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EB28A2440E39200A28FFB /* WeatherData.swift */; };
 		587EC7B5C347749C2AC053C9 /* Pods_Clima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1120D2CE96328D56FFE030C4 /* Pods_Clima.framework */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		0CE7FA9CC825D31FC49A7143 /* Pods-Clima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clima.release.xcconfig"; path = "Target Support Files/Pods-Clima/Pods-Clima.release.xcconfig"; sourceTree = "<group>"; };
 		1120D2CE96328D56FFE030C4 /* Pods_Clima.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clima.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		352C6B7624449BFE0021D145 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		3537B6A8244464AC00ED9A85 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		356EB28A2440E39200A28FFB /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		63E28ACB1B99C32400FBF6E0 /* Clima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clima.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 				63E28AFE1B99C3B300FBF6E0 /* LaunchScreen.xib */,
 				63E28ACE1B99C32400FBF6E0 /* Supporting Files */,
 				3537B6A8244464AC00ED9A85 /* Keys.swift */,
+				352C6B7624449BFE0021D145 /* Networking.swift */,
 			);
 			path = Clima;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				356EB28B2440E39200A28FFB /* WeatherData.swift in Sources */,
 				63E28AF91B99C36100FBF6E0 /* WeatherViewController.swift in Sources */,
 				63E28AD11B99C32400FBF6E0 /* AppDelegate.swift in Sources */,
+				352C6B7724449BFE0021D145 /* Networking.swift in Sources */,
 				63E28AF61B99C36100FBF6E0 /* ChangeCityViewController.swift in Sources */,
 				3537B6A9244464AC00ED9A85 /* Keys.swift in Sources */,
 			);
