@@ -1,5 +1,5 @@
-import RxSwift
 import RxCocoa
+import RxSwift
 import UIKit
 
 class ChangeCityViewController: UIViewController {
@@ -24,25 +24,28 @@ class ChangeCityViewController: UIViewController {
         subscribeToGetWeather()
     }
     
+    //MARK: - Subscriptions
+    
     private func subscribeToBackButton() {
         backButton.rx.tap
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
                 self.dismiss(animated: true)
             }).disposed(by: disposeBag)
     }
     
     private func subscribeToGetWeather() {
         getWeatherButton.rx.tap
-            .filter({ _ in
-                !self.changeCityTextField.text!.isEmpty })
-            .do(onNext: {
-                self.dismiss(animated: true)
+            .filter({ [weak self] _ in
+                guard let self = self else { return false }
+                return !self.changeCityTextField.text!.isEmpty
+            })
+            .do(onNext: { [weak self] _ in
+                self?.dismiss(animated: true)
             })
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                if #available(iOS 13.0, *) {
-                    self.newCity.onNext(self.changeCityTextField.text!)
-                }
+                self.newCity.onNext(self.changeCityTextField.text!)
             }).disposed(by: disposeBag)
     }
 

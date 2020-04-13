@@ -1,9 +1,9 @@
-import UIKit
 import CoreLocation
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
-class WeatherViewController: UIViewController, CLLocationManagerDelegate {
+class WeatherViewController: UIViewController {
     
     //MARK: - Constants
     
@@ -48,8 +48,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     private func subscribeToSwitcher() {
         celsiusOrFahrenheit.rx.isOn
             .subscribe(onNext: { [weak self] _ in
-                guard let self = self,
-                    self.temperatureLabel.text != "" else { return }
+                guard let self = self, self.temperatureLabel.text != "" else { return }
                 self.temperatureLabel.text = self.celsiusOrFahrenheit.isOn ? "\(self.currentShownTemperature)°C" : "\(Int(Double(self.currentShownTemperature) * 1.8 + 32))°F"
             }).disposed(by: disposeBag)
     }
@@ -117,14 +116,17 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     //MARK: - UI Updates
         
-    func updateUI(withWeatherData data: WeatherData) {
+    private func updateUI(withWeatherData data: WeatherData) {
         temperatureLabel.text = data.main.temp == 0.0 ? "" : "\(data.tempInCelsius)°C"
         weatherIcon.image = UIImage(named: data.weatherIcon)
         cityLabel.text = data.name
     }
+       
+}
     
-    //MARK: - Location Manager Delegate Methods
-    
+//MARK: - Location Manager Delegate Methods
+
+extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0 {
